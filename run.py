@@ -4,6 +4,7 @@ from flask import render_template
 from flask_cors import CORS
 
 from api.api import api
+from util.log import Logger
 
 app = Flask(__name__)
 
@@ -18,6 +19,8 @@ def page_not_found(error):
 
 
 if __name__ == '__main__':
-    print('http://0.0.0.0:5000/api')
+    # print('http://0.0.0.0:5000/api')
+    logger = Logger(logName='logs/log.txt', logLevel="INFO", logger="log.py").getlog()
+    logger.info('http://0.0.0.0:5000/api')
     app.run(host="0.0.0.0", debug=True)
 
