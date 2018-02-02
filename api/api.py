@@ -12,9 +12,9 @@ api = Blueprint('api', __name__,
 def index():
     return render_template('api/welcome.html')
 
-#生成密钥接口
+#批量更新接口
 @api.route("/update_abs", methods=['GET'])
-def generate_secret():
+def update_abs():
     file = "epg.txt"
     list = do_modify(file)
     mq_message = render_template('api/update_abs.html', list=list)
