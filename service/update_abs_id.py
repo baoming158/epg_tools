@@ -17,7 +17,8 @@ list = []
 
 def update_epg(line):
     epg = line.split(' ')
-    sql = "UPDATE kytv_resource_column_tvstation SET ca_id = "+str(epg[1])+" WHERE id = %d" % (int(epg[0]))
+    ca_id = epg[1].replace('\n', '')
+    sql = "UPDATE kytv_resource_column_tvstation SET ca_id = "+str(ca_id)+" WHERE id = %d" % (int(epg[0]))
     try:
         # 执行SQL语句
         db.con.cursor().execute(sql)
@@ -48,5 +49,5 @@ def do_modify(file):
 
 
 if __name__ == '__main__':
-    logging.info('start run job')
+    logger.info('start run job')
     do_modify()

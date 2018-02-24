@@ -3,6 +3,7 @@ import json
 from flask import Blueprint, render_template
 
 from rabbitmq.producer import sendMqMessage
+from service.filter_column import read_file_epg
 from service.update_abs_id import do_modify
 
 api = Blueprint('api', __name__,
@@ -26,3 +27,9 @@ def update_abs():
     print(mq_str)
 
     return render_template('api/update_abs.html', list=list)
+
+# 过滤一批epg数据
+@api.route("/read_file_epgs", methods=['GET'])
+def read_file_epgs():
+    file = "epg.txt"
+    read_file_epg(file)
